@@ -1,10 +1,8 @@
 const express = require('express')
-var crypto = require('crypto')
-require('dotenv').config()
+const crypto = require('crypto')
 const mysql = require('mysql2')
-const bodyParser = require('body-parser')
 const app = express()
-
+require('dotenv').config()
 app.use(express.json());
 
 const con = mysql.createConnection({
@@ -41,13 +39,29 @@ app.put('/users', function (req, res) {
         if (rows.length === 0) {
             con.query('INSERT INTO users SET ?', user, (err, res) => {
                 if(err) throw err;
-                console.log('Last insert ID:', res.insertId);
             });
                 return res.json({'insert': 'ok'});
         }else{
             return res.json({'insert': 'fail'});
         }
     });
+})
+// Delete
+app.delete('/users', function (req, res) {
+    const data = {
+        id: req.body.id
+    }
+    con.query(
+        'DELETE FROM users WHERE id = ?', [data.id], (err, result) => {
+          if (err) throw err;
+            if(result.affectedRows>0){
+                return res.json({'delete': 'ok'});
+            }else{
+                return res.json({'delete': 'fail'});
+            }
+        }
+    );
+    
 })
 
 
