@@ -1,11 +1,14 @@
 {
-  "name": "simpleapi",
+  "name": "simple-express",
   "version": "1.0.0",
   "main": "app.js",
   "author": {
     "name": "Pedro Laxe",
     "email": "pedrolaxe@gmail.com",
     "url": "https://insidefuture.com.br"
+  },
+  "repository": {
+    "url": "https://github.com/pedrolaxe/simpleExpress.git"
   },
   "license": "MIT",
   "scripts": {
